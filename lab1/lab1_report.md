@@ -16,7 +16,7 @@ Date of finished: -
 2) После выполнения команды ```minikube start``` можно увидеть следующий вывод об успешном запуске:
 ![Старт конейнера](image1.png)
 3) Авторизуемся в Docker с помощью ```docker login``` — это необходимо, чтобы избежать ошибок: _ErrImagePull_ или _ImagePullBackOff_.
-4) Запускаем под с помощью ```kubectl create -f myfirst.yaml```
+4) Запускаем под с помощью ```kubectl create -f myfirst.yaml``` или ```kubectl apply -f myfirst.yaml```
 5) Делаем кластер доступным снаружи с помощью:
 
 ```bash

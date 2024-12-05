@@ -1,0 +1,55 @@
+Name:             itdt-frontend-deployment-787d4f7cfd-x2xkm
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Thu, 05 Dec 2024 05:48:41 -0500
+Labels:           app=itdt-frontend
+                  pod-template-hash=787d4f7cfd
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.6
+IPs:
+  IP:           10.244.0.6
+Controlled By:  ReplicaSet/itdt-frontend-deployment-787d4f7cfd
+Containers:
+  itdt-frontend:
+    Container ID:   docker://da28e597591d236bcb44d3c118d14ff56d13a6af5744b188d6ec3f57ea37462b
+    Image:          ifilyaninitmo/itdt-contained-frontend:master
+    Image ID:       docker-pullable://ifilyaninitmo/itdt-contained-frontend@sha256:08756f1022aea55538e740562aa980b56be6241d2166e6d8d6521386e0876dbe
+    Port:           3000/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Thu, 05 Dec 2024 05:48:42 -0500
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      REACT_APP_USERNAME:      Andrey Zinchenko
+      REACT_APP_COMPANY_NAME:  Top Da World Inc.
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-zpfwv (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-zpfwv:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  39m   default-scheduler  Successfully assigned default/itdt-frontend-deployment-787d4f7cfd-x2xkm to minikube
+  Normal  Pulled     39m   kubelet            Container image "ifilyaninitmo/itdt-contained-frontend:master" already present on machine
+  Normal  Created    39m   kubelet            Created container itdt-frontend
+  Normal  Started    39m   kubelet            Started container itdt-frontend

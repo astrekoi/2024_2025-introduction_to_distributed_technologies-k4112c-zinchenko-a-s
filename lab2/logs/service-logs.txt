@@ -1,0 +1,18 @@
+Name:                     itdt-frontend-loadbalancer
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=itdt-frontend
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.111.29.243
+IPs:                      10.111.29.243
+Port:                     <unset>  80/TCP
+TargetPort:               3000/TCP
+NodePort:                 <unset>  31839/TCP
+Endpoints:                10.244.0.6:3000,10.244.0.7:3000
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:                   <none>
