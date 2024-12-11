@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-configmap
+data:
+  REACT_APP_USERNAME: "Andrey Zinchenko"
+  REACT_APP_COMPANY_NAME: "Top Da World Inc."
