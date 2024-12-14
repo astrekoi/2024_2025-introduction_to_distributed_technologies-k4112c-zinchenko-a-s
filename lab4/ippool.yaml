@@ -1,0 +1,19 @@
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: zone-rack-01-ippool
+spec:
+  cidr: 192.168.1.0/24
+  ipipMode: Always
+  natOutgoing: true
+  nodeSelector: rack=="rack-m01"
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: zone-rack-02-ippool
+spec:
+  cidr: 192.168.2.0/24
+  ipipMode: Always
+  natOutgoing: true
+  nodeSelector: rack=="rack-m02"

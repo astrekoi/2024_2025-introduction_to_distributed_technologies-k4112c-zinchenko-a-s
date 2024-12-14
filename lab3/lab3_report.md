@@ -8,7 +8,7 @@ Group: K4112C
 Author: Zinchenko Andrey Sergeevich  
 Lab: lab1-lab4  
 Date of create: 8.12.2024  
-Date of finished: - 
+Date of finished: 12.12.2024
 
 # Ход Работы
 

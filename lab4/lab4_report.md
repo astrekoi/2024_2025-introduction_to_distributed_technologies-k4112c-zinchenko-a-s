@@ -7,42 +7,62 @@ Year: 2024/2025
 Group: K4112C  
 Author: Zinchenko Andrey Sergeevich  
 Lab: lab1-lab4  
-Date of create: 4.12.2024  
-Date of finished: - 5.12.2024 
+Date of create: 14.12.2024  
+Date of finished: - 
 
 # Ход Работы
 
-1) Написаны 2 yaml файла: [deploymet.yaml](deployment.yaml) и [service.yaml](service.yaml)
-2) Для запуска были выполенны следущие команды:
+1) Запуск minikube с помощью ```minikube start --driver=docker --cni=calico --nodes 2```
+
+![Nodes](./images/image.png)
+
+![Calico](./images/image%20copy.png)
+
+2) Назначаем метки
 
 ```bash
-$ kubectl apply -f deployment.yaml
-$ kubectl apply -f service.yaml
+$ kubectl label node minikube rack=rack-m01
+$ kubectl label node minikube-m02 rack=rack-m02
 ```
 
-3) Проверим, что были запущены 2 реплики:
+![Rack](./images/image%20copy%202.png)
 
-![Pods](image.png)
+3) Удаляем стандартный пул ```minikube kubectl -- delete ippools default-ipv4-ippool```
 
-4) Проверяем запущенный сервис:
-
-![Services](image-2.png)
-
-5) Для доступа к сервису можно воспользоваться ```minikube service itdt-frontend-loadbalancer --url```, после чего получаем следующий вывод:
+4) Устанавливаем calico как плагин kubectl:
 
 ```bash
-$ minikube service itdt-frontend-loadbalancer --url
-http://192.168.49.2:31839
+curl -L https://github.com/projectcalico/calico/releases/download/v3.29.1/calicoctl-linux-amd64 -o kubectl-calico
 ```
 
-6) Переходим на url:
+```bash
+chmod +x kubectl-calico
+```
 
-![URL](image-3.png)
+![Test calico](./images/image%20copy%203.png)
 
-Как видим переменные - REACT_APP_USERNAME, REACT_APP_COMPANY_NAME остастся прежними так как используются приложением для настройки окружения, в то время как имя контейнера меняется поскольку оно уникально идентифицирует конкретный контейнер внутри кластера.
+5) Создаем 👉 [свой ip-pools](ippool.yaml) и применяем его ```kubectl calico apply -f ippool.yaml --allow-version-mismatch```
 
-7) Таким образом схема взаимодействия сервиса и подов выглядит следующим образом:
+![Проверка калико](./images/image%20copy%204.png)
 
-![Scheme](scheme.png)
+6) Создаем 👉 [Deployment](deployment.yaml) и применяем его ```minikube kubectl -- apply -f deployment.yaml```
 
-Логи: [Logs](/lab2/logs/)
+7) Создаем 👉 [Service](service.yaml) и применяем его ```minikube kubectl -- apply -f service.yaml```
+
+8) Проверяем сервис и поды
+
+![Проверка](./images/image%20copy%206.png)
+
+![Проверка 2](./images/image%20copy%205.png)
+
+9) Пингуем с пода itdt-frontend-deployment-787d4f7cfd-jlcnt под itdt-frontend-deployment-787d4f7cfd-mth2q  
+
+```bash
+kubectl exec itdt-frontend-deployment-787d4f7cfd-jlcnt -- ping -c 5 192.168.2.1
+```
+
+![Ping](./images/image%20copy%207.png)
+
+11) Схема:
+
+![Scheme](./images/scheme.png)
